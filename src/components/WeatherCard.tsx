@@ -1,3 +1,4 @@
+// ...existing code...
 'use client';
 
 import React from 'react';
@@ -10,8 +11,8 @@ interface WeatherCardProps {
   humidity: number;
   time: string;
   condition: string;
-  weatherIcon: string;
-  backgroundClass: string;
+  weatherIcon?: React.ReactNode;
+  backgroundImage?: string;
 }
 
 const WeatherCard: React.FC<WeatherCardProps> = ({
@@ -22,53 +23,48 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
   humidity,
   time,
   condition,
-  weatherIcon,
-  backgroundClass
+  weatherIcon = '☀️',
+  backgroundImage
 }) => {
   return (
-    <div className={`relative rounded-2xl overflow-hidden shadow-lg ${backgroundClass}`}>
-      <div className="absolute inset-0 bg-gradient-to-br from-black/20 to-black/40"></div>
-      <div className="relative p-6 text-white">
-        {/* Header */}
-        <div className="flex justify-between items-start mb-4">
-          <div>
-            <h3 className="text-2xl font-bold">{location}</h3>
-            <p className="text-sm opacity-90">{city}</p>
-          </div>
-          <div className="text-right">
-            <p className="text-sm opacity-90">{time}</p>
-          </div>
+    <div
+      className="relative text-white w-full min-h-[200px]"
+      style={{
+        backgroundImage: backgroundImage ? `url(${backgroundImage})` : undefined,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
+      }}
+    >
+      <div className="absolute inset-0 bg-black/30"></div>
+
+      <div className="relative flex flex-col md:flex-row items-start md:items-center gap-4 p-6 md:p-8">
+        <div className="flex-1">
+          <h4 className="text-sm font-semibold uppercase tracking-wider">{location}</h4>
+          <p className="text-xs opacity-90">{city}</p>
         </div>
 
-        {/* Temperature */}
-        <div className="mb-6">
-          <div className="text-6xl font-bold mb-2">{temperature}°C</div>
+        <div className="flex-1 text-left md:text-center">
+          <div className="text-4xl md:text-6xl font-bold leading-tight">{temperature}°C</div>
+          <div className="text-sm opacity-90 mt-1">{time}</div>
         </div>
 
-        {/* Weather Details */}
-        <div className="space-y-2 mb-6">
+        <div className="flex-1 flex items-center justify-end md:justify-center relative">
+          <div className="w-24 h-24 rounded-full bg-white/20 flex items-center justify-center shadow-lg">
+            <div className="text-4xl">{weatherIcon}</div>
+          </div>
+          <div className="hidden md:block ml-4 text-sm font-medium">{condition}</div>
+        </div>
+      </div>
+
+      <div className="relative px-6 md:px-8 pb-6">
           <div className="flex justify-between text-sm">
-            <span>Angin:</span>
-            <span className="font-medium">{windSpeed}km/jam</span>
+            <div className="text-[13px] text-white/90">Angin: {windSpeed} km/jam</div>
+            <div className="text-[13px] text-white/90">Kelembapan: {humidity}%</div>
           </div>
-          <div className="flex justify-between text-sm">
-            <span>Kelembapan:</span>
-            <span className="font-medium">{humidity}%</span>
-          </div>
-        </div>
-
-        {/* Weather Icon and Condition */}
-        <div className="flex items-center justify-between">
-          <div className="text-center">
-            <div className="text-4xl mb-2">{weatherIcon}</div>
-            <p className="text-sm font-medium">{condition}</p>
-          </div>
-        </div>
       </div>
     </div>
   );
 };
 
 export default WeatherCard;
-
-
+// ...existing code...

@@ -1,9 +1,18 @@
+// ...existing code...
 'use client';
 
 import React from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 const Header = () => {
+  const pathname = usePathname() || '/';
+
+  const isActive = (href: string) => {
+    if (href === '/') return pathname === '/';
+    return pathname.startsWith(href);
+  };
+
   return (
     <header className="bg-white shadow-sm border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-5">
@@ -15,16 +24,32 @@ const Header = () => {
 
           {/* Navigation */}
           <nav className="hidden md:flex space-x-8">
-            <Link href="/" className="text-blue-600 font-bold">
+            <Link
+              href="/"
+              className={isActive('/') ? 'text-blue-600 font-bold' : 'text-gray-700 hover:text-blue-400 font-semibold transition-colors'}
+              aria-current={isActive('/') ? 'page' : undefined}
+            >
               HOME
             </Link>
-            <Link href="/user/cuaca-laut" className="text-gray-700 hover:text-blue-400 font-semibold transition-colors">
+            <Link
+              href="/user/cuaca-laut"
+              className={isActive('/user/cuaca-laut') ? 'text-blue-600 font-bold' : 'text-gray-700 hover:text-blue-400 font-semibold transition-colors'}
+              aria-current={isActive('/user/cuaca-laut') ? 'page' : undefined}
+            >
               CUACA LAUT
             </Link>
-            <Link href="/user/ais" className="text-gray-700 hover:text-blue-400 font-semibold transition-colors">
+            <Link
+              href="/user/ais"
+              className={isActive('/user/ais') ? 'text-blue-600 font-bold' : 'text-gray-700 hover:text-blue-400 font-semibold transition-colors'}
+              aria-current={isActive('/user/ais') ? 'page' : undefined}
+            >
               AIS TRACKER
             </Link>
-            <Link href="/user/dashboard-monitoring" className="text-gray-700 hover:text-blue-400 font-semibold transition-colors">
+            <Link
+              href="/user/dashboard-monitoring"
+              className={isActive('/user/dashboard-monitoring') ? 'text-blue-600 font-bold' : 'text-gray-700 hover:text-blue-400 font-semibold transition-colors'}
+              aria-current={isActive('/user/dashboard-monitoring') ? 'page' : undefined}
+            >
               DASHBOARD MONITORING
             </Link>
           </nav>
@@ -44,3 +69,4 @@ const Header = () => {
 };
 
 export default Header;
+// ...existing code...

@@ -5,7 +5,7 @@ import WeatherCard from './WeatherCard';
 
 const WeatherSection = () => {
   return (
-    <section className="py-12 bg-gray-100">
+    <section className="py-12 bg-gray-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-2 gap-6">
           {/* Ulee Lheue Card - Stormy */}
@@ -18,7 +18,7 @@ const WeatherSection = () => {
             time="10.30 AM"
             condition="Hujan Badai"
             weatherIcon="⛈️"
-            backgroundClass="bg-gradient-to-br from-gray-800 via-gray-700 to-gray-900"
+            backgroundImage="/images/storm-bg.png"
           />
 
           {/* Balohan Card - Sunny */}
@@ -31,7 +31,7 @@ const WeatherSection = () => {
             time="10.30 AM"
             condition="Cerah"
             weatherIcon="☀️"
-            backgroundClass="bg-gradient-to-br from-blue-400 via-blue-500 to-blue-600"
+            backgroundImage="/images/sunny-bg.png"
           />
         </div>
       </div>
